@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elexmedia Loan Management System</title>
+<script>
+        function calculateLoan() {
+            // Get input values
+            var employeeId = document.getElementById('employeeId').value;
+            var designation = document.getElementById('designation').value;
+            var loanAmount = parseFloat(document.getElementById('loanAmount').value);
+            var interestRate = 0;
+ 
+            // Check employee ID format
+            if (!employeeId.startsWith('E') || employeeId.length < 4) {
+                alert('Employee ID must start with "E" and have at least four characters.');
+                return;
+            }
+ 
+            // Calculate interest based on designation
+            switch (designation) {
+                case 'Manager':
+                    interestRate = 0.1; // 10%
+                    break;
+                case 'Developer':
+                    interestRate = 0.08; // 8%
+                    break;
+                case 'Tester':
+                    interestRate = 0.06; // 6%
+                    break;
+                default:
+                    interestRate = 0.05; // 5%
+                    break;
+            }
+ 
+            // Calculate loan amount and interest payable
+            var interest = loanAmount * interestRate;
+            var totalAmount = loanAmount + interest;
+ 
+            // Display results
+            document.getElementById('result').innerHTML = 'Employee ID: ' + employeeId + '<br>' +
+                                                            'Designation: ' + designation + '<br>' +
+                                                            'Loan Amount: $' + loanAmount.toFixed(2) + '<br>' +
+                                                            'Interest Rate: ' + (interestRate * 100) + '%<br>' +
+                                                            'Interest Payable: $' + interest.toFixed(2) + '<br>' +
+                                                            'Total Amount Payable: $' + totalAmount.toFixed(2);
+        }
+</script>
+</head>
+<body>
+<h1>Elexmedia Loan Management System</h1>
+<form>
+<label for="employeeId">Employee ID:</label>
+<input type="text" id="employeeId" name="employeeId" required><br>
+ 
+        <label for="name">Name:</label>
+<input type="text" id="name" name="name" required><br>
+ 
+        <label for="address">Address:</label>
+<input type="text" id="address" name="address" required><br>
+ 
+        <label for="designation">Designation:</label>
+<select id="designation" name="designation">
+<option value="Manager">Manager</option>
+<option value="Developer">Developer</option>
+<option value="Tester">Tester</option>
+<option value="Other">Other</option>
+</select><br>
+ 
+        <label for="loanAmount">Loan Amount:</label>
+<input type="number" id="loanAmount" name="loanAmount" min="1" required><br>
+ 
+        <label for="loanDate">Date of Loan Taken:</label>
+<input type="date" id="loanDate" name="loanDate" required><br>
+ 
+        <label for="interest">Interest:</label>
+<input type="number" id="interest" name="interest" readonly><br>
+ 
+        <label for="maturityDate">Maturity Date:</label>
+<input type="date" id="maturityDate" name="maturityDate" required><br>
+ 
+        <button type="button" onclick="calculateLoan()">Calculate Loan</button>
+</form>
+ 
+    <div id="result"></div>
+</body>
+</html>
+
